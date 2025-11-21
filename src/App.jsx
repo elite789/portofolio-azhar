@@ -26,10 +26,8 @@ import {
 // --- GEMINI API UTILS ---
 
 // PENTING: Konfigurasi API Key
-// 1. Saat Preview di sini: Biarkan const apiKey = ""; (Sistem otomatis menyediakannya).
-// 2. Saat Deploy ke Vercel: Ganti baris di bawah menjadi: 
-//    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-const apiKey = ""; 
+// Membaca API key dari environment variable (Vercel atau .env lokal)
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
 
 const RESUME_CONTEXT = `
 Anda adalah AI Assistant untuk portofolio Azhar Dzakwan Azizi. Jawab pertanyaan pengunjung seolah-olah Anda adalah representasi digital profesional dari Azhar. Gunakan nada yang ramah, profesional, dan antusias.
