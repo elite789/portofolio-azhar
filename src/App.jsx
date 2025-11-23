@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-  Github, 
-  Linkedin, 
-  Mail, 
-  FileText, 
-  Cpu, 
-  Database, 
-  Code, 
-  Terminal, 
-  ExternalLink, 
-  ChevronDown, 
-  Menu, 
+import {
+  Github,
+  Linkedin,
+  Mail,
+  FileText,
+  Cpu,
+  Database,
+  Code,
+  Terminal,
+  ExternalLink,
+  ChevronDown,
+  Menu,
   X,
   Briefcase,
   User,
@@ -22,12 +22,13 @@ import {
   Loader2,
   XCircle
 } from 'lucide-react';
+import resumePDF from './assets/Nov 2025 ATS_Resume_AzharDzakwan.pdf';
 
 // --- GEMINI API UTILS ---
 
 // PENTING: Konfigurasi API Key
 // Membaca API key dari environment variable (Vercel atau .env lokal)
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || ""; 
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
 
 const RESUME_CONTEXT = `
 Anda adalah AI Assistant untuk portofolio Azhar Dzakwan Azizi. Jawab pertanyaan pengunjung seolah-olah Anda adalah representasi digital profesional dari Azhar. Gunakan nada yang ramah, profesional, dan antusias.
@@ -63,7 +64,7 @@ Instruksi Khusus:
 const callGemini = async (prompt, systemInstruction = RESUME_CONTEXT) => {
   // Validasi sederhana untuk environment deploy (jika apiKey kosong di production)
   // Di environment preview ini, apiKey kosong tidak masalah karena di-inject runtime.
-  
+
   try {
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
@@ -98,11 +99,11 @@ const Navbar = ({ activeSection, isScrolled, toggleMenu, isMenuOpen, scrollToSec
         <Cpu className="w-8 h-8" />
         <span>AZHAR.DEV</span>
       </div>
-      
+
       {/* Desktop Menu */}
       <div className="hidden md:flex items-center gap-8 text-slate-300 font-medium">
         {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
-          <button 
+          <button
             key={item}
             onClick={() => scrollToSection(item.toLowerCase())}
             className={`hover:text-cyan-400 transition-colors relative group ${activeSection === item.toLowerCase() ? 'text-cyan-400' : ''}`}
@@ -111,9 +112,9 @@ const Navbar = ({ activeSection, isScrolled, toggleMenu, isMenuOpen, scrollToSec
             <span className={`absolute -bottom-2 left-0 h-0.5 bg-cyan-400 transition-all duration-300 ${activeSection === item.toLowerCase() ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
           </button>
         ))}
-        <a 
-          href="/ATS_Resume_AzharDzakwan.pdf" 
-          target="_blank" 
+        <a
+          href={resumePDF}
+          target="_blank"
           rel="noopener noreferrer"
           className="px-5 py-2 border border-cyan-400 text-cyan-400 rounded-full hover:bg-cyan-400/10 transition-all flex items-center gap-2"
         >
@@ -131,7 +132,7 @@ const Navbar = ({ activeSection, isScrolled, toggleMenu, isMenuOpen, scrollToSec
     <div className={`md:hidden absolute top-full left-0 w-full bg-slate-900 border-b border-slate-800 transition-all duration-300 overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
       <div className="flex flex-col p-6 gap-4 text-center">
         {['Home', 'About', 'Experience', 'Projects', 'Skills', 'Contact'].map((item) => (
-          <button 
+          <button
             key={item}
             onClick={() => scrollToSection(item.toLowerCase())}
             className={`text-lg font-medium ${activeSection === item.toLowerCase() ? 'text-cyan-400' : 'text-slate-300'}`}
@@ -139,11 +140,13 @@ const Navbar = ({ activeSection, isScrolled, toggleMenu, isMenuOpen, scrollToSec
             {item}
           </button>
         ))}
-        <a 
-          href="/ATS_Resume_AzharDzakwan.pdf" 
+        <a
+          href={resumePDF}
+          target="_blank"
+          rel="noopener noreferrer"
           className="text-cyan-400 flex justify-center items-center gap-2 py-2"
         >
-          <FileText size={18} /> Download Resume
+          <FileText size={18} /> Resume
         </a>
       </div>
     </div>
@@ -155,7 +158,7 @@ const Hero = ({ scrollToSection }) => (
     {/* Animated Background Elements */}
     <div className="absolute top-20 right-10 w-72 h-72 bg-cyan-500/20 rounded-full blur-[100px] animate-pulse"></div>
     <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-600/20 rounded-full blur-[100px] animate-pulse delay-700"></div>
-    
+
     <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
       <div className="inline-block px-4 py-2 bg-slate-800/50 backdrop-blur border border-slate-700 rounded-full text-cyan-400 font-medium mb-6 animate-fade-in-up">
         👋 Hello, World! I am
@@ -169,9 +172,9 @@ const Hero = ({ scrollToSection }) => (
       <p className="text-slate-400 text-lg mb-10 max-w-2xl leading-relaxed animate-fade-in-up delay-300">
         Menggabungkan keahlian Robotika, Artificial Intelligence, dan Data Analytics untuk menciptakan solusi otomatisasi cerdas dan wawasan bisnis yang berdampak.
       </p>
-      
+
       <div className="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-400">
-        <button 
+        <button
           onClick={() => scrollToSection('projects')}
           className="px-8 py-4 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-full transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2"
         >
@@ -192,9 +195,9 @@ const Hero = ({ scrollToSection }) => (
 );
 
 const SocialLink = ({ href, icon }) => (
-  <a 
-    href={href} 
-    target="_blank" 
+  <a
+    href={href}
+    target="_blank"
     rel="noopener noreferrer"
     className="p-3 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-cyan-400 rounded-full transition-all border border-slate-700 hover:border-cyan-400/50"
   >
@@ -206,7 +209,7 @@ const About = () => (
   <section id="about" className="py-24 bg-slate-900 relative">
     <div className="container mx-auto px-6">
       <SectionTitle title="About Me" subtitle="Who I Am" />
-      
+
       <div className="grid md:grid-cols-2 gap-12 items-center">
         <div className="relative group">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl transform rotate-6 group-hover:rotate-3 transition-transform opacity-20"></div>
@@ -223,7 +226,7 @@ const About = () => (
             </p>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-4">
           <StatCard icon={<Award />} value="3.66" label="GPA (Cum Laude)" />
           <StatCard icon={<Briefcase />} value="3+" label="Posisi Profesional" />
@@ -247,9 +250,9 @@ const Experience = () => (
   <section id="experience" className="py-24 bg-slate-950">
     <div className="container mx-auto px-6">
       <SectionTitle title="Experience" subtitle="My Career Journey" />
-      
+
       <div className="max-w-4xl mx-auto space-y-8">
-        <ExperienceCard 
+        <ExperienceCard
           role="Intern AI Analyst"
           company="AMANA Solutions"
           period="Nov 2025 - Present"
@@ -260,7 +263,7 @@ const Experience = () => (
           ]}
           active={true}
         />
-        <ExperienceCard 
+        <ExperienceCard
           role="IT Support"
           company="PT Delta Mate Indonesia"
           period="Jul 2025 - Oct 2025"
@@ -270,7 +273,7 @@ const Experience = () => (
             "Menggunakan Python (Pandas) untuk otomatisasi pengolahan data payroll bulanan."
           ]}
         />
-        <ExperienceCard 
+        <ExperienceCard
           role="Sales Admin"
           company="PT Chelatama Perkasa"
           period="Dec 2024 - Apr 2025"
@@ -280,7 +283,7 @@ const Experience = () => (
             "Membangun tracking sheet berbasis Excel untuk visibilitas progress proyek."
           ]}
         />
-        <ExperienceCard 
+        <ExperienceCard
           role="IoT R&D Engineer Intern"
           company="PT ARIA AGRI Indonesia"
           period="Aug 2022 - Dec 2022"
@@ -322,10 +325,10 @@ const Projects = () => (
   <section id="projects" className="py-24 bg-slate-900">
     <div className="container mx-auto px-6">
       <SectionTitle title="Projects" subtitle="Featured Work & Code" />
-      
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Project 1: Thesis */}
-        <ProjectCard 
+        <ProjectCard
           title="Autonomous Mobile Robot A*"
           tags={['Python', 'Robotics', 'Path Planning', 'Sensors']}
           desc="Mengembangkan robot mobile otonom dengan algoritma A-Star untuk navigasi rute terdekat. Integrasi rotary encoder dan sensor ultrasonik untuk obstacle avoidance."
@@ -333,9 +336,9 @@ const Projects = () => (
           type="Thesis"
           fullContext="Proyek skripsi ini berfokus pada navigasi robot mobile otonom. Tantangan utamanya adalah mengimplementasikan algoritma A* (A-Star) secara efisien pada hardware terbatas agar robot dapat mencari rute terpendek secara real-time. Saya menggunakan Python untuk logika navigasi dan mengintegrasikan data dari rotary encoder (odometry) serta sensor ultrasonik untuk deteksi halangan dinamis."
         />
-        
+
         {/* Project 2: NLP */}
-        <ProjectCard 
+        <ProjectCard
           title="Podcast Summarization AI"
           tags={['Python', 'NLP', 'HuggingFace', 'Wav2Vec', 'BART']}
           desc="Pipeline otomatis untuk memproses audio podcast, transkripsi speech-to-text (Whisper), dan peringkasan teks menggunakan model transformer BART."
@@ -345,7 +348,7 @@ const Projects = () => (
         />
 
         {/* Project 3: Data Analytics */}
-        <ProjectCard 
+        <ProjectCard
           title="Sales & Inventory Dashboard"
           tags={['Tableau', 'Pandas', 'Excel', 'Data Viz']}
           desc="Dashboard interaktif untuk visualisasi tren penjualan dan stok. Mengotomatisasi laporan penjualan dari 2 jam menjadi 15 menit menggunakan Python."
@@ -376,7 +379,7 @@ const ProjectCard = ({ title, tags, desc, link, type, fullContext }) => {
     if (insight) return; // Don't regenerate if already present
     setLoading(true);
     const prompt = `Analisis proyek teknis berikut ini secara singkat (maksimal 3 kalimat poin-poin). Jelaskan "Technical Challenge", "Solution", dan "Impact" agar mudah dimengerti recruiter. Proyek: ${title}. Konteks: ${fullContext}`;
-    
+
     const result = await callGemini(prompt, "You are a senior tech recruiter analyst. Summarize technical projects impressively.");
     setInsight(result);
     setLoading(false);
@@ -400,7 +403,7 @@ const ProjectCard = ({ title, tags, desc, link, type, fullContext }) => {
         </div>
         <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">{title}</h3>
         <p className="text-slate-400 text-sm mb-6 flex-grow">{desc}</p>
-        
+
         {/* AI Insight Section */}
         {insight && (
           <div className="mb-4 p-3 bg-cyan-900/20 border border-cyan-500/30 rounded-lg animate-fade-in text-sm text-cyan-100">
@@ -420,9 +423,9 @@ const ProjectCard = ({ title, tags, desc, link, type, fullContext }) => {
             ))}
           </div>
         </div>
-        
+
         {/* AI Button */}
-        <button 
+        <button
           onClick={handleAIInsight}
           disabled={loading || insight}
           className={`mt-4 w-full py-2 rounded-lg border text-xs font-bold flex items-center justify-center gap-2 transition-all ${insight ? 'bg-slate-900 text-slate-500 border-slate-800' : 'bg-gradient-to-r from-cyan-900/50 to-blue-900/50 border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/20'}`}
@@ -447,7 +450,7 @@ const Skills = () => {
     <section id="skills" className="py-24 bg-slate-950">
       <div className="container mx-auto px-6">
         <SectionTitle title="Skills" subtitle="Technical Arsenal" />
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="bg-slate-900 p-6 rounded-xl border border-slate-800 hover:border-cyan-500/30 transition-all">
@@ -471,14 +474,14 @@ const Contact = () => (
   <section id="contact" className="py-24 bg-slate-900">
     <div className="container mx-auto px-6 max-w-4xl">
       <SectionTitle title="Contact" subtitle="Get In Touch" />
-      
+
       <div className="grid md:grid-cols-2 gap-12">
         <div>
           <h3 className="text-2xl font-bold text-white mb-6">Mari Berkolaborasi!</h3>
           <p className="text-slate-400 mb-8">
             Saya terbuka untuk kesempatan kerja penuh waktu atau freelance di bidang Data Science, AI, atau IoT. Jika Anda memiliki proyek menarik atau tawaran pekerjaan, jangan ragu untuk menghubungi saya.
           </p>
-          
+
           <div className="space-y-4">
             <ContactItem icon={<Mail />} text="azhardzakwanazizi@gmail.com" href="mailto:azhardzakwanazizi@gmail.com" />
             <ContactItem icon={<Linkedin />} text="linkedin.com/in/azhardzakwan" href="https://linkedin.com/in/azhardzakwan" />
@@ -605,11 +608,10 @@ const ChatWidget = () => {
           <div className="flex-1 p-4 h-80 overflow-y-auto bg-slate-950/50 space-y-4 custom-scrollbar">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${
-                  msg.role === 'user' 
-                    ? 'bg-cyan-600 text-white rounded-br-none' 
+                <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
+                    ? 'bg-cyan-600 text-white rounded-br-none'
                     : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-none'
-                }`}>
+                  }`}>
                   {msg.text}
                 </div>
               </div>
@@ -628,7 +630,7 @@ const ChatWidget = () => {
 
           {/* Input */}
           <div className="p-3 bg-slate-800 border-t border-slate-700">
-            <form 
+            <form
               className="flex gap-2"
               onSubmit={(e) => {
                 e.preventDefault();
@@ -642,7 +644,7 @@ const ChatWidget = () => {
                 placeholder="Tanya tentang Azhar..."
                 className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-cyan-500 transition-colors"
               />
-              <button 
+              <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
                 className="bg-cyan-500 hover:bg-cyan-600 text-white p-2 rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -655,7 +657,7 @@ const ChatWidget = () => {
       )}
 
       {/* Toggle Button */}
-      <button 
+      <button
         onClick={() => setIsOpen(!isOpen)}
         className={`group flex items-center justify-center w-14 h-14 rounded-full shadow-lg shadow-cyan-500/20 transition-all duration-300 ${isOpen ? 'bg-slate-700 rotate-90' : 'bg-gradient-to-r from-cyan-500 to-blue-600 hover:scale-110'}`}
       >
@@ -707,12 +709,12 @@ const App = () => {
 
   return (
     <div className="font-sans bg-slate-950 text-slate-200 min-h-screen selection:bg-cyan-500/30 selection:text-cyan-200">
-      <Navbar 
-        activeSection={activeSection} 
-        isScrolled={isScrolled} 
-        toggleMenu={toggleMenu} 
-        isMenuOpen={isMenuOpen} 
-        scrollToSection={scrollToSection} 
+      <Navbar
+        activeSection={activeSection}
+        isScrolled={isScrolled}
+        toggleMenu={toggleMenu}
+        isMenuOpen={isMenuOpen}
+        scrollToSection={scrollToSection}
       />
       <Hero scrollToSection={scrollToSection} />
       <About />
@@ -721,7 +723,7 @@ const App = () => {
       <Skills />
       <Contact />
       <Footer />
-      
+
       {/* AI Chat Widget */}
       <ChatWidget />
     </div>
