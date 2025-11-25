@@ -559,7 +559,7 @@ const ChatWidget = () => {
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   useEffect(() => {
@@ -584,7 +584,7 @@ const ChatWidget = () => {
     <div className="fixed bottom-6 right-6 z-50 font-sans">
       {/* Chat Window */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-80 md:w-96 bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-up">
+        <div className="absolute bottom-16 right-0 w-80 md:w-96 h-[500px] bg-slate-900 border border-slate-700 rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-fade-in-up">
           {/* Header */}
           <div className="bg-slate-800 p-4 border-b border-slate-700 flex justify-between items-center">
             <div className="flex items-center gap-2">
@@ -605,12 +605,12 @@ const ChatWidget = () => {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 p-4 h-80 overflow-y-auto bg-slate-950/50 space-y-4 custom-scrollbar">
+          <div className="flex-1 p-4 overflow-y-auto bg-slate-950/50 space-y-4 custom-scrollbar">
             {messages.map((msg, idx) => (
               <div key={idx} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                 <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                    ? 'bg-cyan-600 text-white rounded-br-none'
-                    : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-none'
+                  ? 'bg-cyan-600 text-white rounded-br-none'
+                  : 'bg-slate-800 text-slate-200 border border-slate-700 rounded-bl-none'
                   }`}>
                   {msg.text}
                 </div>
