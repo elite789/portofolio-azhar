@@ -259,7 +259,7 @@ const Experience = () => (
           description={[
             "Memulai peran baru sebagai AI Analyst, berfokus pada analisis data dan pengembangan solusi AI.",
             "Berkolaborasi dalam tim untuk proyek-proyek inovatif berbasis kecerdasan buatan.",
-            "Siap mengimplementasikan teknik machine learning untuk memecahkan masalah bisnis nyata."
+            "Mengimplementasikan integrasi AI dalam berbagai solusi bisnis untuk meningkatkan efisiensi dan produktivitas."
           ]}
           active={true}
         />
@@ -531,11 +531,11 @@ const ContactItem = ({ icon, text, href }) => (
 
 const SectionTitle = ({ title, subtitle }) => (
   <div className="text-center mb-16">
-    <span className="text-cyan-400 font-medium tracking-wider uppercase text-sm">{subtitle}</span>
-    <h2 className="text-3xl md:text-4xl font-bold text-white mt-2 relative inline-block">
+    <h2 className="text-3xl md:text-4xl font-bold text-white relative inline-block">
       {title}
       <span className="absolute -bottom-4 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-cyan-500 rounded-full"></span>
     </h2>
+    <span className="text-cyan-400 font-medium tracking-wider uppercase text-sm block mt-6">{subtitle}</span>
   </div>
 );
 
